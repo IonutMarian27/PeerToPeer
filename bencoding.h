@@ -193,8 +193,7 @@ void initializeHead() {
 }
 
 void writeBencodeString(Bencoding *value, FILE *f) {
-    fprintf(f,"%d:%s", strlen(value->value.str), value->value.str);
-    //fwrite(value->value.str,sizeof(char),strlen(value->value.str),f);
+    fprintf(f,"%Lu:%s", strlen(value->value.str), value->value.str);
 }
 
 void printBencodeString(Bencoding *value) {
@@ -214,7 +213,7 @@ void writeBencodeDict(dictNode *value, FILE *f) {
     dictNode *curr = value;
     Bencoding *bValue;
     do {
-        fprintf(f,"%d:%s", strlen(curr->key),curr->key);
+        fprintf(f,"%Lu:%s", strlen(curr->key),curr->key);
         bValue = curr->value;
         switch(bValue->type) {
             case BSTRING:

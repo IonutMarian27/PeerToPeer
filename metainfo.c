@@ -35,7 +35,6 @@ char *getPiecesOfFile(char *filePath) {
     struct stat st;
     stat(filePath, &st);
     unsigned char *values = (unsigned char *)calloc(5120000,sizeof(char));
-    //unsigned char values2[512000];
     char *shaResult = (char *)calloc(20*(st.st_size/(512*1000)+1)+1,sizeof(char));
     unsigned char partial[SHA_DIGEST_LENGTH];
     long i = 0;
@@ -43,7 +42,6 @@ char *getPiecesOfFile(char *filePath) {
         do {
             long length = fread(values,sizeof(unsigned char),512*1000,f);
             if(length != 0) {
-                //memcpy(values2,values,length);
                 SHA1(values,length,partial);
                 memcpy(shaResult+i*20,partial,20);
                 i++;
@@ -54,7 +52,6 @@ char *getPiecesOfFile(char *filePath) {
     }
     free(values);
     fclose(f);
-    //free(partial);
     return shaResult;
 }
 
