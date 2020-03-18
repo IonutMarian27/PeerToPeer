@@ -1,4 +1,3 @@
-./Tore/*
-./Tore
+a.exe
+.\a.exe
 ./a.exe
-./.gitignore
